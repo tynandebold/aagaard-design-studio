@@ -13,7 +13,7 @@ const IndexPage = () => (
     </section>
     <section className="right">
       <div className="img-wrapper">
-        <div className="img-container"></div>
+        <div className="img-container" />
       </div>
     </section>
   </Layout>
