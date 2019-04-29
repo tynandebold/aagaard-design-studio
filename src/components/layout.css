@@ -25,6 +25,8 @@ summary {
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  font-weight: 500;
+  text-decoration: none;
 }
 a:active,
 a:hover {
@@ -106,6 +108,14 @@ p {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: justify;
+  color: #0d0d0d;
 }
 b {
   font-weight: bold;
@@ -121,4 +131,75 @@ p *:last-child {
   html {
     font-size: 100%;
   }
+}
+
+/* Custom styles below  */
+
+.content-wrapper {
+  height: 100vh;
+  padding: 24px;
+  position: relative;
+}
+
+@media only screen and (max-width: 1024px) {
+  .content-wrapper {
+    height: auto;
+  } 
+}
+
+header {
+  position: absolute;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.left {
+  align-self: flex-end;
+  padding-right: 1rem;
+  width: 40%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .left {
+    align-items: flex-end;
+    display: flex;
+    height: 40vh;
+    margin-bottom: 2rem;
+    padding-right: 0;
+    width: 100%;
+  }
+}
+
+.right {
+  width: 60%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .right {
+    width: 100%;
+  } 
+}
+
+.img-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.img-container {
+  background-color: #f2f1f0; 
+  /* max-height: 672px;
+  max-width: 740px; */
+  padding-top: 91%;
+  position: relative; 
+  width: 100%; 
 }

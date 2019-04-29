@@ -25,16 +25,15 @@ const Layout = ({ children, darkTheme }) => (
     `}
     render={data => (
       <div
+        className="content-wrapper"
         style={{
           backgroundColor: darkTheme ? `black` : `#f2f1f0`,
-          height: `100vh`,
-          padding: `24px`,
         }}
       >
         <Header siteTitle={data.site.siteMetadata.title} dark={darkTheme} />
-        <div style={{}}>
+        <>
           <main>{children}</main>
-        </div>
+        </>
       </div>
     )}
   />
