@@ -5,6 +5,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Nav from "../components/nav"
 
+import libratone from "../images/02.case_dinadona.png"
+
+console.log(libratone)
+
 const IndexPage = () => (
   <Layout darkTheme={true}>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
@@ -13,7 +17,10 @@ const IndexPage = () => (
     </section>
     <section className="right">
       <div className="img-wrapper">
-        <div className="img-container" />
+        <div
+          className="img-container"
+          style={{ backgroundImage: `url(${libratone})` }}
+        />
       </div>
     </section>
   </Layout>

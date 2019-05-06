@@ -197,6 +197,8 @@ main {
 
 .img-container {
   background-color: #f2f1f0;
+  background-position: center;
+  background-size: cover;
   /* max-height: 672px;
   max-width: 740px; */
   padding-top: 91%;
