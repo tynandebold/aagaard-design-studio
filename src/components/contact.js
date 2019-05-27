@@ -34,6 +34,7 @@ class Contact extends React.Component {
               height: 0,
               opacity: 0.01,
               position: "absolute",
+              right: 0,
             }}
             defaultValue="fta@charlietango.dk"
           />

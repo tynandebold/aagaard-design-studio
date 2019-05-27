@@ -7,7 +7,7 @@ const Nav = ({ page }) => (
   <nav>
     {page === "home" ? (
       <>
-        <Link to="/" activeStyle={{ color: "white", marginRight: "1rem" }}>
+        <Link to="/" activeStyle={{ color: "white", marginRight: "1.3333rem" }}>
           Work
         </Link>
         <Link to="/about/" style={{ color: "#ffffff", opacity: 0.4 }}>
@@ -18,7 +18,7 @@ const Nav = ({ page }) => (
       <>
         <Link
           to="/"
-          style={{ color: "#0d0d0d", opacity: 0.4, marginRight: "1rem" }}
+          style={{ color: "#0d0d0d", opacity: 0.4, marginRight: "1.3333rem" }}
         >
           {" "}
           Work{" "}
