@@ -166,6 +166,12 @@ main {
   height: 700px;
 }
 
+@media only screen and (max-width: 1024px) {
+  main {
+    height: auto;
+  }
+}
+
 .left {
   align-self: flex-end;
   padding-right: 1rem;
@@ -189,6 +195,7 @@ main {
 
 @media only screen and (max-width: 1024px) {
   .right {
+    min-height: calc(60vh - 40px);
     width: 100%;
   }
 }
