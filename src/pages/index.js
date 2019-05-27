@@ -10,25 +10,28 @@ import flux from "../images/01.logo_flux.png"
 import libratone from "../images/02.case_dinadona.png"
 import k30 from "../images/03.case_K30-2.png"
 
-const slides = [
+const projects = [
   {
     id: 0,
+    name: "Flux, website",
     url: flux,
   },
   {
     id: 1,
+    name: "Libratone, website",
     url: libratone,
   },
   {
     id: 2,
+    name: "K30, website",
     url: k30,
   },
 ]
 
 const IndexPage = () => {
-  const [index, set] = useState(0)
+  const [index, setIndex] = useState(0)
 
-  const transitions = useTransition(slides[index], item => item.id, {
+  const transitions = useTransition(projects[index], item => item.id, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -36,14 +39,14 @@ const IndexPage = () => {
   })
 
   const changeImage = () => {
-    set(state => (state + 1) % slides.length)
+    setIndex(state => (state + 1) % projects.length)
   }
 
   return (
     <Layout darkTheme={true}>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <section className="left">
-        <Nav page="home" />
+        <Nav page="home" projectTitle={projects[index].name} />
       </section>
       <section className="right">
         <div className="img-wrapper">

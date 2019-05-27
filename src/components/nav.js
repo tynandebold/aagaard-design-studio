@@ -3,16 +3,17 @@ import { Link } from "gatsby"
 
 import Contact from "../components/contact"
 
-const Nav = ({ page }) => (
+const Nav = ({ page, projectTitle }) => (
   <nav>
     {page === "home" ? (
       <>
-        <Link to="/" activeStyle={{ color: "white", marginRight: "1.3333rem" }}>
+        <Link to="/" activeStyle={{ color: "#fff", marginRight: "1.3333rem" }}>
           Work
         </Link>
-        <Link to="/about/" style={{ color: "#ffffff", opacity: 0.4 }}>
+        <Link to="/about/" style={{ color: "#fff", opacity: 0.4 }}>
           Info
         </Link>
+        <div className="project-title">{projectTitle}</div>
       </>
     ) : (
       <>

@@ -180,7 +180,7 @@ main {
 
 .left {
   align-self: flex-end;
-  padding-right: 1rem;
+  padding-right: 1.3333rem;
   width: 40%;
 }
 
@@ -271,4 +271,10 @@ button:hover {
 
 .copied-msg.active {
   opacity: 1;
+}
+
+.project-title {
+  color: #fff;
+  font-weight: 500;
+  margin-left: auto;
 }
