@@ -27,6 +27,7 @@ a {
   -webkit-text-decoration-skip: objects;
   font-weight: 500;
   text-decoration: none;
+  transition: 0.2s ease opacity;
 }
 a:active,
 a:hover {
@@ -160,6 +161,10 @@ nav {
   width: 100%;
 }
 
+nav a:hover {
+  opacity: 1 !important;
+}
+
 main {
   display: flex;
   flex-wrap: wrap;
@@ -227,10 +232,15 @@ button {
   font-weight: 500;
   opacity: 0.4;
   padding: 0;
+  transition: 0.2s ease opacity;
 }
 
 button:focus {
   outline: none;
+}
+
+button:hover {
+  opacity: 1;
 }
 
 .contact-btn-wrapper {
