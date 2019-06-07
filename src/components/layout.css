@@ -147,7 +147,7 @@ p *:last-child {
 
 @media only screen and (max-width: 1024px) {
   .content-wrapper {
-    height: auto;
+    /* height: auto; */
     padding: 1rem 0.66667rem 0.66667rem;
   }
 }
@@ -197,6 +197,7 @@ main {
 }
 
 .right {
+  cursor: pointer;
   overflow: hidden;
   width: 60%;
 }

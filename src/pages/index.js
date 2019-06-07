@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useTransition, animated, config } from "react-spring"
 
 import Layout from "../components/layout"
@@ -10,55 +10,74 @@ import flux from "../images/01.logo_flux.png"
 import libratone from "../images/02.case_dinadona.png"
 import k30 from "../images/03.case_K30-2.png"
 
-const projects = [
+const asdf = [
   {
-    id: 0,
+    _id: 0,
     name: "Flux, website",
-    url: flux,
+    image: flux,
   },
   {
-    id: 1,
+    _id: 1,
     name: "Libratone, website",
-    url: libratone,
+    image: libratone,
   },
   {
-    id: 2,
+    _id: 2,
     name: "K30, website",
-    url: k30,
+    image: k30,
   },
 ]
 
 const IndexPage = () => {
   const [index, setIndex] = useState(0)
+  const [loading, setLoading] = useState(false)
+  // const [error, setError] = useState(false)
+  const [projects, setProjects] = useState([])
 
-  const transitions = useTransition(projects[index], item => item.id, {
+  const changeImage = () => {
+    setIndex(state => (state + 1) % asdf.length)
+  }
+
+  useEffect(() => {
+    setLoading(true)
+
+    fetch(`http://localhost:3000/api/projects`)
+      .then(response => response.json())
+      .then(data => {
+        setProjects(data.projects)
+        setLoading(false)
+      })
+  }, [])
+
+  const transitions = useTransition(asdf, project => project._id, {
     from: { opacity: 0, transform: "translate3d(100%,0,0)" },
     enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
     leave: { opacity: 0, transform: "translate3d(-50%,0,0)" },
     config: config.default,
   })
 
-  const changeImage = () => {
-    setIndex(state => (state + 1) % projects.length)
-  }
-
   return (
     <Layout darkTheme={true}>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <section className="left">
-        <Nav page="home" projectTitle={projects[index].name} />
+        <Nav
+          page="home"
+          projectTitle={projects.length ? projects[index].title : ""}
+        />
       </section>
       <section className="right">
-        <div className="img-wrapper">
-          {transitions.map(({ item, props, key }) => (
-            <animated.div
-              key={key}
-              className="img-container"
-              onClick={changeImage}
-              style={{ ...props, backgroundImage: `url(${item.url})` }}
-            />
-          ))}
-        </div>
+        {projects.length && (
+          <div className="img-wrapper">
+            {transitions.map(({ item, props, key }) => (
+              <animated.div
+                key={key}
+                className="img-container"
+                onClick={changeImage}
+                style={{ ...props, backgroundImage: `url(${item.image})` }}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </Layout>
   )
