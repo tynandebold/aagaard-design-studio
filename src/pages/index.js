@@ -1,86 +1,89 @@
-import React, { useState, useEffect } from "react"
-import { useTransition, animated, config } from "react-spring"
+import React from "react"
+import { Transition, animated, config } from "react-spring/renderprops"
 
 import Layout from "../components/layout"
 // import Image from "../components/image"
 import SEO from "../components/seo"
 import Nav from "../components/nav"
 
-import flux from "../images/01.logo_flux.png"
-import libratone from "../images/02.case_dinadona.png"
-import k30 from "../images/03.case_K30-2.png"
-
-const asdf = [
-  {
-    _id: 0,
-    name: "Flux, website",
-    image: flux,
-  },
-  {
-    _id: 1,
-    name: "Libratone, website",
-    image: libratone,
-  },
-  {
-    _id: 2,
-    name: "K30, website",
-    image: k30,
-  },
-]
-
-const IndexPage = () => {
-  const [index, setIndex] = useState(0)
-  const [loading, setLoading] = useState(false)
-  // const [error, setError] = useState(false)
-  const [projects, setProjects] = useState([])
-
-  const changeImage = () => {
-    setIndex(state => (state + 1) % asdf.length)
+class IndexPage extends React.Component {
+  state = {
+    error: null,
+    images: [],
+    index: 0,
+    loading: true,
+    projects: [],
   }
 
-  useEffect(() => {
-    setLoading(true)
+  componentDidMount() {
+    this.fetchProjects()
+  }
 
+  fetchProjects() {
     fetch(`http://localhost:3000/api/projects`)
       .then(response => response.json())
       .then(data => {
-        setProjects(data.projects)
-        setLoading(false)
-      })
-  }, [])
-
-  const transitions = useTransition(asdf, project => project._id, {
-    from: { opacity: 0, transform: "translate3d(100%,0,0)" },
-    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
-    leave: { opacity: 0, transform: "translate3d(-50%,0,0)" },
-    config: config.default,
-  })
-
-  return (
-    <Layout darkTheme={true}>
-      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-      <section className="left">
-        <Nav
-          page="home"
-          projectTitle={projects.length ? projects[index].title : ""}
-        />
-      </section>
-      <section className="right">
-        {projects.length && (
-          <div className="img-wrapper">
-            {transitions.map(({ item, props, key }) => (
+        this.setState({
+          projects: data.projects,
+          isLoading: false,
+          images: data.projects.map(project => {
+            return style => (
               <animated.div
-                key={key}
                 className="img-container"
-                onClick={changeImage}
-                style={{ ...props, backgroundImage: `url(${item.image})` }}
+                onClick={this.changeImage}
+                style={{ ...style, backgroundImage: `url(${project.image})` }}
               />
-            ))}
-          </div>
-        )}
-      </section>
-    </Layout>
-  )
+            )
+          }),
+        })
+      })
+      .catch(error => this.setState({ error, isLoading: false }))
+  }
+
+  changeImage = () => {
+    this.setState(state => ({
+      index: (state.index + 1) % state.projects.length,
+    }))
+  }
+
+  render() {
+    const { isLoading, projects, index, error } = this.state
+
+    if (error) console.log(error)
+
+    return (
+      <Layout darkTheme={true}>
+        <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+        <section className="left">
+          <Nav
+            page="home"
+            projectTitle={projects.length ? projects[index].title : ""}
+          />
+        </section>
+        <section className="right">
+          {!isLoading ? (
+            <div className="img-wrapper">
+              <Transition
+                native
+                reset
+                unique
+                config={config.default}
+                items={this.state.index}
+                from={{ opacity: 0, transform: "translate3d(100%,0,0)" }}
+                enter={{ opacity: 1, transform: "translate3d(0%,0,0)" }}
+                leave={{ opacity: 0, transform: "translate3d(-50%,0,0)" }}
+              >
+                {index => this.state.images[index]}
+              </Transition>
+            </div>
+          ) : (
+            <h3>Loading...</h3>
+          )}
+          {error && <p>An error occurred. Please try again later.</p>}
+        </section>
+      </Layout>
+    )
+  }
 }
 
 export default IndexPage
