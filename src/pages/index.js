@@ -1,89 +1,67 @@
-import React from "react"
-import { Transition, animated, config } from "react-spring/renderprops"
+import React, { useState, useEffect } from "react"
+import { useTransition, animated, config } from "react-spring"
 
 import Layout from "../components/layout"
-// import Image from "../components/image"
 import SEO from "../components/seo"
 import Nav from "../components/nav"
 
-class IndexPage extends React.Component {
-  state = {
-    error: null,
-    images: [],
-    index: 0,
-    loading: true,
-    projects: [],
+const IndexPage = () => {
+  const [index, setIndex] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [projects, setProjects] = useState([""])
+
+  const changeImage = () => {
+    setIndex(state => (state + 1) % projects.length)
   }
 
-  componentDidMount() {
-    this.fetchProjects()
-  }
+  useEffect(() => {
+    setLoading(true)
 
-  fetchProjects() {
     fetch(`http://localhost:3000/api/projects`)
       .then(response => response.json())
       .then(data => {
-        this.setState({
-          projects: data.projects,
-          isLoading: false,
-          images: data.projects.map(project => {
-            return style => (
-              <animated.div
-                className="img-container"
-                onClick={this.changeImage}
-                style={{ ...style, backgroundImage: `url(${project.image})` }}
-              />
-            )
-          }),
-        })
+        setProjects(data.projects)
+        setLoading(false)
       })
-      .catch(error => this.setState({ error, isLoading: false }))
-  }
+      .catch(error => {
+        setError(error)
+        setLoading(false)
+      })
+  }, [])
 
-  changeImage = () => {
-    this.setState(state => ({
-      index: (state.index + 1) % state.projects.length,
-    }))
-  }
+  const transitions = useTransition(projects[index], project => project._id, {
+    from: { opacity: 0, transform: "translate3d(100%,0,0)" },
+    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+    leave: { opacity: 0, transform: "translate3d(-50%,0,0)" },
+    config: config.default,
+  })
 
-  render() {
-    const { isLoading, projects, index, error } = this.state
+  if (error) console.log(error)
 
-    if (error) console.log(error)
-
-    return (
-      <Layout darkTheme={true}>
-        <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-        <section className="left">
-          <Nav
-            page="home"
-            projectTitle={projects.length ? projects[index].title : ""}
-          />
-        </section>
-        <section className="right">
-          {!isLoading ? (
-            <div className="img-wrapper">
-              <Transition
-                native
-                reset
-                unique
-                config={config.default}
-                items={this.state.index}
-                from={{ opacity: 0, transform: "translate3d(100%,0,0)" }}
-                enter={{ opacity: 1, transform: "translate3d(0%,0,0)" }}
-                leave={{ opacity: 0, transform: "translate3d(-50%,0,0)" }}
-              >
-                {index => this.state.images[index]}
-              </Transition>
-            </div>
-          ) : (
-            <h3>Loading...</h3>
-          )}
-          {error && <p>An error occurred. Please try again later.</p>}
-        </section>
-      </Layout>
-    )
-  }
+  return (
+    <Layout darkTheme={true}>
+      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <section className="left">
+        <Nav page="home" projectTitle={!loading ? projects[index].title : ""} />
+      </section>
+      <section className="right">
+        {!loading && !error && (
+          <div className="img-wrapper">
+            {transitions.map(({ item, props, key }) => (
+              <animated.div
+                key={key}
+                className="img-container"
+                onClick={changeImage}
+                style={{ ...props, backgroundImage: `url(${item.image})` }}
+              />
+            ))}
+          </div>
+        )}
+        {error && <p>An error occurred. Please try again later.</p>}
+      </section>
+    </Layout>
+  )
 }
 
 export default IndexPage
