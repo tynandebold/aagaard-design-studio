@@ -58,7 +58,11 @@ const IndexPage = () => {
             ))}
           </div>
         )}
-        {error && <p>An error occurred. Please try again later.</p>}
+        {error && (
+          <p style={{ color: "#fff" }}>
+            An error occurred. Please try again later.
+          </p>
+        )}
       </section>
     </Layout>
   )
