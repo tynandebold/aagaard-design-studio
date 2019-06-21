@@ -18,10 +18,10 @@ const IndexPage = () => {
   useEffect(() => {
     setLoading(true)
 
-    fetch(`http://localhost:3000/api/projects`)
+    fetch(`http://localhost:4000/api/projects`)
       .then(response => response.json())
       .then(data => {
-        setProjects(data.projects)
+        setProjects(data.projects.sort((a, b) => +a.order - +b.order))
         setLoading(false)
       })
       .catch(error => {
