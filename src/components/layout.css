@@ -139,16 +139,20 @@ p *:last-child {
 
 /* Custom styles below  */
 
+:root {
+  --spacing: 1rem;
+  --spacing-small: 0.66667rem;
+}
+
 .content-wrapper {
   height: 100vh;
-  padding: 1.3333rem;
+  padding: var(--spacing);
   position: relative;
 }
 
 @media only screen and (max-width: 1024px) {
   .content-wrapper {
-    /* height: auto; */
-    padding: 1rem 0.66667rem 0.66667rem;
+    padding: var(--spacing) var(--spacing-small) var(--spacing-small);
   }
 }
 
@@ -159,6 +163,10 @@ header {
 nav {
   display: flex;
   width: 100%;
+}
+
+.nav-link--first {
+  padding-right: var(--spacing);
 }
 
 nav a:hover {
@@ -181,7 +189,7 @@ main {
 
 .left {
   align-self: flex-end;
-  padding-right: 1.3333rem;
+  padding-right: var(--spacing);
   width: 40%;
 }
 
@@ -197,8 +205,10 @@ main {
 }
 
 .right {
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  position: relative;
   width: 60%;
 }
 
@@ -207,6 +217,31 @@ main {
     min-height: calc(65vh - 40px);
     width: 100%;
   }
+}
+
+.date {
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.toggle {
+  bottom: 0;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  z-index: 1;
+}
+
+.toggle--left {
+  cursor: url("../images/cursor-left.png") 0 0, e-resize;
+  cursor: -webkit-image-set(url("../images/cursor-left.png") 1x, url("../images/cursor-left@2x.png") 2x) 0 0, e-resize;
+  left: 0;
+}
+
+.toggle--right {
+  cursor: url("../images/cursor-right.png") 0 0, e-resize;
+  cursor: -webkit-image-set(url("../images/cursor-right.png") 1x, url("../images/cursor-right@2x.png") 2x) 0 0, e-resize;
+  right: 0;
 }
 
 .img-wrapper {

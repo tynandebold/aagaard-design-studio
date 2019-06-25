@@ -6,7 +6,7 @@ import Nav from "../components/nav"
 
 const AboutPage = () => (
   <Layout darkTheme={false}>
-    <SEO title="About" />
+    <SEO title="about" />
     <section className="left">
       <Nav page="about" />
     </section>
@@ -25,6 +25,7 @@ const AboutPage = () => (
         Lauritz Arkitekter, Dinesen, YouSee, Virk, Borger, Storebælt AS, 3 Days
         of Design, Gether Conemporary, ABN Amro, Anker&co, Scalepoint + more.
       </p>
+      <p className="date">26.06––2019</p>
     </section>
   </Layout>
 )

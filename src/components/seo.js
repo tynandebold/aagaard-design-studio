@@ -10,9 +10,9 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-import favicon from "../images/favicon.png"
+import icon from "../images/icon.png"
 
-function SEO({ description, lang, meta, keywords, title }) {
+function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -21,6 +21,7 @@ function SEO({ description, lang, meta, keywords, title }) {
             title
             description
             author
+            keywords
           }
         }
       }
@@ -35,10 +36,10 @@ function SEO({ description, lang, meta, keywords, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`${site.siteMetadata.title} | %s`}
       link={[
-        { rel: "icon", type: "image/png", sizes: "64x64", href: `${favicon}` },
-        { rel: "shortcut icon", type: "image/png", href: `${favicon}` },
+        { rel: "icon", type: "image/png", sizes: "64x64", href: `${icon}` },
+        { rel: "shortcut icon", type: "image/png", href: `${icon}` },
       ]}
       meta={[
         {
@@ -75,10 +76,10 @@ function SEO({ description, lang, meta, keywords, title }) {
         },
       ]
         .concat(
-          keywords.length > 0
+          site.siteMetadata.keywords.length > 0
             ? {
                 name: `keywords`,
-                content: keywords.join(`, `),
+                content: site.siteMetadata.keywords.join(`, `),
               }
             : []
         )

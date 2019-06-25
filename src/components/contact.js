@@ -1,53 +1,46 @@
-import React from "react"
+import React, { useState } from "react"
 
-class Contact extends React.Component {
-  constructor(props) {
-    super()
+const Contact = () => {
+  const [active, setActive] = useState(false)
+  const [copyMessage, setCopyMessage] = useState("")
 
-    this.state = {
-      active: false,
-      copyMessage: "",
-    }
-  }
-
-  handleClick = e => {
+  const handleClick = e => {
     e.target.firstChild.select()
     document.execCommand("copy")
-    this.setState({ active: true, copyMessage: "Email copied to clipboard" })
-    this.removeClass()
+    setActive(true)
+    setCopyMessage("Email copied to clipboard")
+    removeClass()
   }
 
-  removeClass = () => {
+  const removeClass = () => {
     window.setTimeout(() => {
-      this.setState({ active: false })
+      setActive(false)
     }, 3500)
   }
 
-  render() {
-    return (
-      <div className="contact-btn-wrapper">
-        <button onClick={this.handleClick}>
-          <input
-            style={{
-              top: "-1rem",
-              cursor: "default",
-              height: 0,
-              opacity: 0.01,
-              position: "absolute",
-              right: 0,
-            }}
-            defaultValue="fta@charlietango.dk"
-          />
-          Contact
-        </button>
-        {this.state.copyMessage && (
-          <p className={this.state.active ? "copied-msg active" : "copied-msg"}>
-            {this.state.copyMessage}
-          </p>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className="contact-btn-wrapper">
+      <button onClick={handleClick}>
+        <input
+          style={{
+            top: "-1rem",
+            cursor: "default",
+            height: 0,
+            opacity: 0.01,
+            position: "absolute",
+            right: 0,
+          }}
+          defaultValue="fta@charlietango.dk"
+        />
+        Contact
+      </button>
+      {copyMessage && (
+        <p className={active ? "copied-msg active" : "copied-msg"}>
+          {copyMessage}
+        </p>
+      )}
+    </div>
+  )
 }
 
 export default Contact
