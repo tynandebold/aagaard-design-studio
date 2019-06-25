@@ -64,6 +64,7 @@ html {
 }
 body {
   color: #0d0d0d;
+  background-color: #f2f1f0;
   font-family: "Helvetica Neue", Helvetica, serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -152,6 +153,7 @@ p *:last-child {
 
 @media only screen and (max-width: 1024px) {
   .content-wrapper {
+    height: auto;
     padding: var(--spacing) var(--spacing-small) var(--spacing-small);
   }
 }
@@ -221,6 +223,7 @@ main {
 
 .date {
   align-self: flex-end;
+  padding-bottom: var(--spacing-small);
   margin-top: auto;
 }
 
