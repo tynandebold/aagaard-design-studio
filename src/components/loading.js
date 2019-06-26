@@ -12,12 +12,16 @@ const Loading = props => {
         : setText(prevText => prevText + ".")
     }, props.interval)
 
+    if (props.interval === 0) {
+      window.clearInterval(interval)
+    }
+
     return function cleanup() {
       window.clearInterval(interval)
     }
   })
 
-  return <h4 className="preloader">{text}</h4>
+  return <h4 className={props.class}>{text}</h4>
 }
 
 export default Loading

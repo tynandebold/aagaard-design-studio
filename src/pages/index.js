@@ -13,6 +13,7 @@ const IndexPage = () => {
   const [projects, setProjects] = useState([""])
   const [inverse, setInverse] = useState(1)
   const [preloader, setPreloader] = useState(true)
+  const [interval, setInterval] = useState(375)
 
   useEffect(() => {
     if (sessionStorage.getItem("ads-loaded")) {
@@ -44,6 +45,7 @@ const IndexPage = () => {
 
   setTimeout(() => {
     setPreloader(false)
+    setInterval(0)
     sessionStorage.setItem("ads-loaded", true)
   }, 3200)
 
@@ -120,7 +122,11 @@ const IndexPage = () => {
           </p>
         )}
       </section>
-      {preloader && <Loading interval="375" text="Loading" />}
+      <Loading
+        class={preloader ? "preloader show" : "preloader hide"}
+        interval={interval}
+        text="Loading"
+      />
     </Layout>
   )
 }
