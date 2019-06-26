@@ -12,13 +12,13 @@ const IndexPage = () => {
   const [error, setError] = useState(null)
   const [projects, setProjects] = useState([""])
   const [inverse, setInverse] = useState(1)
-  const [preloader, setPreloader] = useState(false)
+  const [preloader, setPreloader] = useState(true)
 
   useEffect(() => {
-    setLoading(true)
-    if (!sessionStorage.getItem("ads-loaded")) {
-      setPreloader(true)
+    if (sessionStorage.getItem("ads-loaded")) {
+      setPreloader(false)
     }
+    setLoading(true)
     const lastVisited = localStorage.getItem("ads-timestamp")
 
     if (lessThan12HoursAgo(lastVisited)) {
