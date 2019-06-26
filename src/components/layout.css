@@ -63,8 +63,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: #0d0d0d;
-  background-color: #f2f1f0;
+  color: #000;
   font-family: "Helvetica Neue", Helvetica, serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -154,6 +153,7 @@ p *:last-child {
 @media only screen and (max-width: 1024px) {
   .content-wrapper {
     height: auto;
+    min-height: 100vh;
     padding: var(--spacing) var(--spacing-small) var(--spacing-small);
   }
 }
@@ -186,6 +186,13 @@ main {
 @media only screen and (max-width: 1024px) {
   main {
     height: auto;
+  }
+}
+
+@media only screen and (min-width: 1750px) {
+  main {
+    max-height: 960px;
+    max-width: 1750px;
   }
 }
 
@@ -223,8 +230,14 @@ main {
 
 .date {
   align-self: flex-end;
-  padding-bottom: var(--spacing-small);
+  line-height: normal;
   margin-top: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+  .date {
+    padding-bottom: var(--spacing-small);
+  }
 }
 
 .toggle {
@@ -236,14 +249,14 @@ main {
 }
 
 .toggle--left {
-  cursor: url("../images/cursor-left.png") 0 0, e-resize;
-  cursor: -webkit-image-set(url("../images/cursor-left.png") 1x, url("../images/cursor-left@2x.png") 2x) 0 0, e-resize;
+  cursor: url("../images/cursor-left.svg") 0 0, e-resize;
+  cursor: -webkit-image-set(url("../images/cursor-left.svg") 1x);
   left: 0;
 }
 
 .toggle--right {
-  cursor: url("../images/cursor-right.png") 0 0, e-resize;
-  cursor: -webkit-image-set(url("../images/cursor-right.png") 1x, url("../images/cursor-right@2x.png") 2x) 0 0, e-resize;
+  cursor: url("../images/cursor-right.svg") 0 0, e-resize;
+  cursor: -webkit-image-set(url("../images/cursor-right.svg") 1x) 0 0, e-resize;
   right: 0;
 }
 
@@ -301,13 +314,13 @@ button:hover {
   letter-spacing: normal;
   line-height: 1.33;
   opacity: 0;
-  padding: 4px 10px 6px;
+  padding: 4px 0 6px;
   position: absolute;
   right: 0;
   text-align: center;
   transition: 0.35s opacity ease;
   top: -3rem;
-  width: 210px;
+  width: 200px;
 }
 
 .copied-msg.active {
@@ -318,4 +331,25 @@ button:hover {
   color: #fff;
   font-weight: 500;
   margin-left: auto;
+}
+
+.preloader {
+  align-items: flex-end;
+  background-color: #000;
+  bottom: 0;
+  color: #fff;
+  display: flex;
+  left: 0;
+  margin: 0;
+  padding: var(--spacing);
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+@media only screen and (max-width: 1024px) {
+  .preloader {
+    padding: var(--spacing) var(--spacing-small) var(--spacing-small);
+  }
 }

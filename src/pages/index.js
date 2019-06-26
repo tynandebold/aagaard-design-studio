@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { useTransition, animated, config } from "react-spring"
+import { useTransition, animated } from "react-spring"
 
 import Layout from "../components/layout"
+import Loading from "../components/loading"
 import SEO from "../components/seo"
 import Nav from "../components/nav"
 
@@ -10,12 +11,15 @@ const IndexPage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [projects, setProjects] = useState([""])
-  const [from, setFrom] = useState(100)
-  const [leave, setLeave] = useState(-50)
+  const [inverse, setInverse] = useState(1)
+  const [preloader, setPreloader] = useState(false)
 
   useEffect(() => {
-    const lastVisited = localStorage.getItem("ads-timestamp")
     setLoading(true)
+    if (!sessionStorage.getItem("ads-loaded")) {
+      setPreloader(true)
+    }
+    const lastVisited = localStorage.getItem("ads-timestamp")
 
     if (lessThan12HoursAgo(lastVisited)) {
       useLocalData()
@@ -38,6 +42,11 @@ const IndexPage = () => {
       })
   }, [])
 
+  setTimeout(() => {
+    setPreloader(false)
+    sessionStorage.setItem("ads-loaded", true)
+  }, 3200)
+
   const useLocalData = () => {
     const data = localStorage.getItem("ads-data")
 
@@ -55,8 +64,7 @@ const IndexPage = () => {
   const changeImage = direction => {
     if (direction === "right") {
       setIndex(index => (index + 1) % projects.length)
-      setFrom(100)
-      setLeave(-50)
+      setInverse(1)
     } else {
       if (index - 1 < 0) {
         setIndex(projects.length - 1)
@@ -64,16 +72,15 @@ const IndexPage = () => {
         setIndex(index - 1)
       }
 
-      setFrom(-100)
-      setLeave(50)
+      setInverse(-1)
     }
   }
 
   const transitions = useTransition(projects[index], project => project._id, {
-    from: { opacity: 0, transform: `translate3d(${from}%,0,0)` },
+    from: { opacity: 1, transform: `translate3d(${100 * inverse}%,0,0)` },
     enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
-    leave: { opacity: 0, transform: `translate3d(${leave}%,0,0)` },
-    config: config.default,
+    leave: { opacity: 1, transform: `translate3d(${-100 * inverse}%,0,0)` },
+    config: { clamp: true, tension: 195 },
   })
 
   if (error) console.log(error)
@@ -113,6 +120,7 @@ const IndexPage = () => {
           </p>
         )}
       </section>
+      {preloader && <Loading interval="375" text="Loading" />}
     </Layout>
   )
 }

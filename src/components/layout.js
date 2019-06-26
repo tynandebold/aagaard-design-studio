@@ -27,7 +27,7 @@ const Layout = ({ children, darkTheme }) => (
       <div
         className="content-wrapper"
         style={{
-          backgroundColor: darkTheme ? `black` : `#f2f1f0`,
+          backgroundColor: darkTheme ? `#000` : `#f2f1f0`,
         }}
       >
         <Header siteTitle={data.site.siteMetadata.title} dark={darkTheme} />
