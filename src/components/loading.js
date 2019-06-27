@@ -21,7 +21,7 @@ const Loading = props => {
     }
   })
 
-  return <h4 className={props.class}>{text}</h4>
+  return <h4 className={`preloader ${props.class}`}>{text}</h4>
 }
 
 export default Loading

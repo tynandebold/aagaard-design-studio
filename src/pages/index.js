@@ -123,7 +123,7 @@ const IndexPage = () => {
         )}
       </section>
       <Loading
-        class={preloader ? "preloader show" : "preloader hide"}
+        class={preloader ? "show" : "hide"}
         interval={interval}
         text="Loading"
       />
