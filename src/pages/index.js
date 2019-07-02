@@ -10,7 +10,7 @@ const IndexPage = () => {
   const [index, setIndex] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [projects, setProjects] = useState([""])
+  const [projects, setProjects] = useState([{}])
   const [inverse, setInverse] = useState(1)
   const [preloader, setPreloader] = useState(true)
   const [interval, setInterval] = useState(375)
@@ -80,9 +80,10 @@ const IndexPage = () => {
 
   const transitions = useTransition(projects[index], project => project._id, {
     from: { opacity: 1, transform: `translate3d(${100 * inverse}%,0,0)` },
-    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+    enter: { opacity: 1, transform: "translate3d(0,0,0)" },
     leave: { opacity: 1, transform: `translate3d(${-100 * inverse}%,0,0)` },
     config: { clamp: true, tension: 195 },
+    initial: null,
   })
 
   if (error) console.log(error)
@@ -105,14 +106,13 @@ const IndexPage = () => {
               onClick={() => changeImage("right")}
             />
             <div className="img-wrapper">
-              {projects[index].image &&
-                transitions.map(({ item, props, key }) => (
-                  <animated.div
-                    key={key}
-                    className="img-container"
-                    style={{ ...props, backgroundImage: `url(${item.image})` }}
-                  />
-                ))}
+              {transitions.map(({ item, props, key }) => (
+                <animated.div
+                  key={key}
+                  className="img-container"
+                  style={{ ...props, backgroundImage: `url(${item.image})` }}
+                />
+              ))}
             </div>
           </>
         )}

@@ -113,7 +113,7 @@ p {
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
-  line-height: 1.6666666;
+  line-height: 1.8rem;
   letter-spacing: normal;
   text-align: justify;
   color: #0d0d0d;
@@ -140,7 +140,7 @@ p *:last-child {
 /* Custom styles below  */
 
 :root {
-  --spacing: 1rem;
+  --spacing: 1.2rem;
   --spacing-small: 0.66667rem;
 }
 
@@ -199,7 +199,7 @@ main {
   .left {
     align-items: flex-end;
     display: flex;
-    height: 30vh;
+    height: 32.5vh;
     margin-bottom: 1rem;
     padding-right: 0;
     width: 100%;
@@ -216,7 +216,7 @@ main {
 
 @media only screen and (max-width: 1024px) {
   .right {
-    min-height: calc(70vh - 40px);
+    min-height: calc(67.5vh - 40px);
     width: 100%;
   }
 }
@@ -261,7 +261,7 @@ main {
 }
 
 .img-container {
-  background-color: #000;
+  background-color: #0d0d0d;
   background-position: center;
   background-size: cover;
   left: 0;
@@ -344,6 +344,7 @@ button:hover {
 }
 
 .preloader.hide {
+  font-weight: 500;
   opacity: 0;
   pointer-events: none;
 }
