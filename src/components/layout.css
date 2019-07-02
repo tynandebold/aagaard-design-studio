@@ -116,7 +116,7 @@ p {
   line-height: 1.8rem;
   letter-spacing: normal;
   text-align: justify;
-  color: #0d0d0d;
+  color: var(--color-black);
 }
 p:last-of-type {
   margin-bottom: 0;
@@ -140,6 +140,7 @@ p *:last-child {
 /* Custom styles below  */
 
 :root {
+  --color-black: #0d0d0d;
   --spacing: 1.2rem;
   --spacing-small: 0.66667rem;
 }
@@ -261,7 +262,7 @@ main {
 }
 
 .img-container {
-  background-color: #0d0d0d;
+  background-color: var(--color-black);
   background-position: center;
   background-size: cover;
   left: 0;
@@ -275,7 +276,7 @@ main {
 button {
   background-color: transparent;
   border: none;
-  color: #0d0d0d;
+  color: var(--color-black);
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
@@ -298,7 +299,7 @@ button:hover {
 }
 
 .copied-msg {
-  background-color: #0d0d0d;
+  background-color: var(--color-black);
   color: #ffffff;
   font-size: 1rem;
   font-stretch: normal;
@@ -328,7 +329,7 @@ button:hover {
 
 .preloader {
   align-items: flex-end;
-  background-color: #000;
+  background-color: var(--color-black);
   bottom: 0;
   color: #fff;
   display: flex;
