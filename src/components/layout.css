@@ -355,3 +355,30 @@ button:hover {
     padding: var(--spacing) var(--spacing-small) 80px;
   }
 }
+
+.flickity-enabled,
+.flickity-viewport,
+.flickity-slider {
+  width: 100%;
+}
+
+button.flickity-button.flickity-prev-next-button {
+  -webkit-transform: none;
+  background-color: transparent;
+  border-radius: 0;
+  height: 100%;
+  opacity: 0;
+  top: 0;
+  transform: none;
+  width: 50%;
+}
+
+button.flickity-button.flickity-prev-next-button.previous {
+  cursor: url("../images/cursor-left.svg") 0 0, e-resize;
+  cursor: -webkit-image-set(url("../images/cursor-left.svg") 1x);
+}
+
+button.flickity-button.flickity-prev-next-button.next {
+  cursor: url("../images/cursor-right.svg") 0 0, e-resize;
+  cursor: -webkit-image-set(url("../images/cursor-right.svg") 1x) 0 0, e-resize;
+}

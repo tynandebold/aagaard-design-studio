@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { useTransition, animated } from "react-spring"
+import Flickity from "react-flickity-component"
+import "flickity/dist/flickity.css"
 
 import Layout from "../components/layout"
 import Loading from "../components/loading"
@@ -11,7 +12,6 @@ const IndexPage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [projects, setProjects] = useState([{}])
-  const [inverse, setInverse] = useState(1)
   const [preloader, setPreloader] = useState(true)
   const [interval, setInterval] = useState(375)
 
@@ -63,28 +63,24 @@ const IndexPage = () => {
     return date > timeAgo
   }
 
-  const changeImage = direction => {
-    if (direction === "right") {
-      setIndex(index => (index + 1) % projects.length)
-      setInverse(1)
-    } else {
-      if (index - 1 < 0) {
-        setIndex(projects.length - 1)
-      } else {
-        setIndex(index - 1)
-      }
+  // const changeImage = direction => {
+  //   if (direction === "right") {
+  //     setIndex(index => (index + 1) % projects.length)
+  //   } else {
+  //     if (index - 1 < 0) {
+  //       setIndex(projects.length - 1)
+  //     } else {
+  //       setIndex(index - 1)
+  //     }
+  //   }
+  // }
 
-      setInverse(-1)
-    }
+  const flickityOptions = {
+    cellSelector: ".img-container",
+    fullscreen: true,
+    pageDots: false,
+    wrapAround: true,
   }
-
-  const transitions = useTransition(projects[index], project => project._id, {
-    from: { opacity: 1, transform: `translate3d(${100 * inverse}%,0,0)` },
-    enter: { opacity: 1, transform: "translate3d(0,0,0)" },
-    leave: { opacity: 1, transform: `translate3d(${-100 * inverse}%,0,0)` },
-    config: { clamp: true, tension: 195 },
-    initial: null,
-  })
 
   if (error) console.log(error)
 
@@ -97,22 +93,16 @@ const IndexPage = () => {
       <section className="right">
         {!loading && !error && (
           <>
-            <div
-              className="toggle toggle--left"
-              onClick={() => changeImage("left")}
-            />
-            <div
-              className="toggle toggle--right"
-              onClick={() => changeImage("right")}
-            />
             <div className="img-wrapper">
-              {transitions.map(({ item, props, key }) => (
-                <animated.div
-                  key={key}
-                  className="img-container"
-                  style={{ ...props, backgroundImage: `url(${item.image})` }}
-                />
-              ))}
+              <Flickity options={flickityOptions} reloadOnUpdate>
+                {projects.map(i => (
+                  <div
+                    className="img-container"
+                    key={i._id}
+                    style={{ backgroundImage: `url(${i.image})` }}
+                  />
+                ))}
+              </Flickity>
             </div>
           </>
         )}
