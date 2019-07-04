@@ -226,7 +226,7 @@ main {
   .left {
     align-items: flex-end;
     display: flex;
-    height: 31.5vh;
+    height: 31vh;
     margin-bottom: 1rem;
     padding-right: 0;
     width: 100%;
@@ -243,7 +243,7 @@ main {
 
 @media only screen and (max-width: 1024px) {
   .right {
-    min-height: calc(68.5vh - 40px);
+    min-height: calc(69vh - 40px);
     width: 100%;
   }
 }
@@ -357,7 +357,7 @@ button:hover {
   align-items: flex-end;
   background-color: var(--color-dark);
   bottom: 0;
-  color: #fff;
+  color: var(--color-dark);
   display: flex;
   left: 0;
   margin: 0;
@@ -370,6 +370,11 @@ button:hover {
   z-index: 2;
 }
 
+.preloader.show {
+  color: #fff;
+  transition: color 0.5s ease;
+}
+
 .preloader.hide {
   font-weight: 500;
   opacity: 0;
@@ -378,9 +383,11 @@ button:hover {
 
 @media only screen and (max-width: 1024px) {
   .preloader {
-    padding: var(--spacing) var(--spacing-small) 80px;
+    padding: var(--spacing) var(--spacing-small) var(--spacing);
   }
 }
+
+/* Flickity (carousel) styles below */
 
 .flickity-enabled,
 .flickity-viewport,

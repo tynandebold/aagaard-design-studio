@@ -12,12 +12,11 @@ const Flickity =
     : () => null
 
 const IndexPage = () => {
-  const [index, setIndex] = useState(0)
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [projects, setProjects] = useState([{}])
-  const [preloader, setPreloader] = useState(true)
+  const [index, setIndex] = useState(0)
   const [interval, setInterval] = useState(375)
+  const [loading, setLoading] = useState(true)
+  const [projects, setProjects] = useState([{}])
   const [shouldAutoplay, setAutoplay] = useState(false)
 
   const flickityOptions = {
@@ -30,14 +29,22 @@ const IndexPage = () => {
   }
 
   useEffect(() => {
+    setLoading(true)
+
     if (window.innerWidth < 660) {
       setAutoplay(2250)
     }
 
     if (sessionStorage.getItem("ads-loaded")) {
-      setPreloader(false)
+      setLoading(false)
+    } else {
+      setTimeout(() => {
+        setLoading(false)
+        setInterval(0)
+        sessionStorage.setItem("ads-loaded", true)
+      }, 3200)
     }
-    setLoading(true)
+
     const lastVisited = localStorage.getItem("ads-timestamp")
 
     if (lessThan12HoursAgo(lastVisited)) {
@@ -50,28 +57,19 @@ const IndexPage = () => {
       .then(data => {
         const sortedData = data.projects.sort((a, b) => +a.order - +b.order)
         setProjects(sortedData)
-        setLoading(false)
 
         localStorage.setItem("ads-timestamp", Date.now())
         localStorage.setItem("ads-data", JSON.stringify(sortedData))
       })
       .catch(error => {
         setError(error)
-        setLoading(false)
       })
   }, [])
-
-  setTimeout(() => {
-    setPreloader(false)
-    setInterval(0)
-    sessionStorage.setItem("ads-loaded", true)
-  }, 3200)
 
   const useLocalData = () => {
     const data = localStorage.getItem("ads-data")
 
     setProjects(JSON.parse(data))
-    setLoading(false)
   }
 
   const lessThan12HoursAgo = date => {
@@ -99,11 +97,11 @@ const IndexPage = () => {
                 }}
                 options={flickityOptions}
               >
-                {projects.map(i => (
+                {projects.map((project, index) => (
                   <div
                     className="img-container"
-                    key={i._id}
-                    style={{ backgroundImage: `url(${i.image})` }}
+                    key={index}
+                    style={{ backgroundImage: `url(${project.image})` }}
                   />
                 ))}
               </Flickity>
@@ -117,7 +115,7 @@ const IndexPage = () => {
         )}
       </section>
       <Loading
-        class={preloader ? "show" : "hide"}
+        class={loading ? "show" : "hide"}
         interval={interval}
         text="Loading"
       />
