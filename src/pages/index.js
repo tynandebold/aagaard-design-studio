@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react"
-if (typeof window !== `undefined`) {
-  import Flickity from "react-flickity-component"
-}
+import Flickity from "react-flickity-component"
 import "flickity/dist/flickity.css"
 
 import Layout from "../components/layout"
