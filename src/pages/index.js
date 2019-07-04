@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
-import Flickity from "react-flickity-component"
+if (typeof window !== `undefined`) {
+  import Flickity from "react-flickity-component"
+}
 import "flickity/dist/flickity.css"
 
 import Layout from "../components/layout"
@@ -94,7 +96,7 @@ const IndexPage = () => {
         {!loading && !error && (
           <>
             <div className="img-wrapper">
-              {/* <Flickity options={flickityOptions} reloadOnUpdate>
+              <Flickity options={flickityOptions} reloadOnUpdate>
                 {projects.map(i => (
                   <div
                     className="img-container"
@@ -102,7 +104,7 @@ const IndexPage = () => {
                     style={{ backgroundImage: `url(${i.image})` }}
                   />
                 ))}
-              </Flickity> */}
+              </Flickity>
             </div>
           </>
         )}
