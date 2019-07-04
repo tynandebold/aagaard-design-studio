@@ -94,7 +94,7 @@ const IndexPage = () => {
         {!loading && !error && (
           <>
             <div className="img-wrapper">
-              <Flickity options={flickityOptions} reloadOnUpdate>
+              {/* <Flickity options={flickityOptions} reloadOnUpdate>
                 {projects.map(i => (
                   <div
                     className="img-container"
@@ -102,7 +102,7 @@ const IndexPage = () => {
                     style={{ backgroundImage: `url(${i.image})` }}
                   />
                 ))}
-              </Flickity>
+              </Flickity> */}
             </div>
           </>
         )}
