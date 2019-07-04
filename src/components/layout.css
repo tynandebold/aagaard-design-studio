@@ -366,10 +366,10 @@ button:hover {
 }
 
 @media only screen and (max-width: 660px) {
-  .flickity-enabled,
-  .flickity-viewport,
-  .flickity-slider {
-    height: 60vh;
+  .right .img-wrapper .flickity-enabled,
+  .right .img-wrapper .flickity-viewport,
+  .right .img-wrapper .flickity-slider {
+    height: 50vh;
   }
 }
 
