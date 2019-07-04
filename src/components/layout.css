@@ -142,6 +142,7 @@ p *:last-child {
 :root {
   --color-black: #0d0d0d;
   --spacing: 1.2rem;
+  --spacing-double: calc(var(--spacing) * 2);
   --spacing-small: 0.66667rem;
 }
 
@@ -359,6 +360,8 @@ button:hover {
 .flickity-enabled,
 .flickity-viewport,
 .flickity-slider {
+  height: calc(100vh - var(--spacing-double));
+  max-height: 960px;
   width: 100%;
 }
 
@@ -371,6 +374,13 @@ button.flickity-button.flickity-prev-next-button {
   top: 0;
   transform: none;
   width: 50%;
+}
+
+@media only screen and (max-width: 660px) {
+  button.flickity-button.flickity-prev-next-button {
+    display: none;
+    pointer-events: none;
+  }
 }
 
 button.flickity-button.flickity-prev-next-button.previous {

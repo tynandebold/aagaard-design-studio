@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react"
-import Flickity from "react-flickity-component"
 import "flickity/dist/flickity.css"
 
 import Layout from "../components/layout"
 import Loading from "../components/loading"
 import SEO from "../components/seo"
 import Nav from "../components/nav"
+
+const Flickity =
+  typeof window !== "undefined"
+    ? require("react-flickity-component")
+    : () => null
 
 const IndexPage = () => {
   const [index, setIndex] = useState(0)
@@ -14,8 +18,22 @@ const IndexPage = () => {
   const [projects, setProjects] = useState([{}])
   const [preloader, setPreloader] = useState(true)
   const [interval, setInterval] = useState(375)
+  const [shouldAutoplay, setAutoplay] = useState(false)
+
+  const flickityOptions = {
+    autoPlay: shouldAutoplay,
+    fullscreen: true,
+    imagesLoaded: true,
+    pageDots: false,
+    setGallerySize: false,
+    wrapAround: true,
+  }
 
   useEffect(() => {
+    if (window.innerWidth < 660) {
+      setAutoplay(2250)
+    }
+
     if (sessionStorage.getItem("ads-loaded")) {
       setPreloader(false)
     }
@@ -63,38 +81,24 @@ const IndexPage = () => {
     return date > timeAgo
   }
 
-  // const changeImage = direction => {
-  //   if (direction === "right") {
-  //     setIndex(index => (index + 1) % projects.length)
-  //   } else {
-  //     if (index - 1 < 0) {
-  //       setIndex(projects.length - 1)
-  //     } else {
-  //       setIndex(index - 1)
-  //     }
-  //   }
-  // }
-
-  const flickityOptions = {
-    cellSelector: ".img-container",
-    fullscreen: true,
-    pageDots: false,
-    wrapAround: true,
-  }
-
   if (error) console.log(error)
 
   return (
     <Layout darkTheme={true}>
       <SEO title="home" />
       <section className="left">
-        <Nav page="home" projectTitle={!loading ? projects[index].title : ""} />
+        <Nav page="home" projectTitle={projects[index].title || ""} />
       </section>
       <section className="right">
         {!loading && !error && (
           <>
             <div className="img-wrapper">
-              <Flickity options={flickityOptions} reloadOnUpdate>
+              <Flickity
+                flickityRef={c => {
+                  c.on("change", () => setIndex(c.selectedIndex))
+                }}
+                options={flickityOptions}
+              >
                 {projects.map(i => (
                   <div
                     className="img-container"
