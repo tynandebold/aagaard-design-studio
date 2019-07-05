@@ -359,6 +359,7 @@ button:hover {
   bottom: 0;
   color: var(--color-dark);
   display: flex;
+  font-weight: 500;
   left: 0;
   margin: 0;
   opacity: 1;
@@ -376,7 +377,6 @@ button:hover {
 }
 
 .preloader.hide {
-  font-weight: 500;
   opacity: 0;
   pointer-events: none;
 }

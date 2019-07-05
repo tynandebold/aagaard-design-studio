@@ -21,9 +21,11 @@ const IndexPage = () => {
 
   const flickityOptions = {
     autoPlay: shouldAutoplay,
+    friction: 0.5,
     fullscreen: true,
     imagesLoaded: true,
     pageDots: false,
+    selectedAttraction: 0.08,
     setGallerySize: false,
     wrapAround: true,
   }
@@ -37,6 +39,7 @@ const IndexPage = () => {
 
     if (sessionStorage.getItem("ads-loaded")) {
       setLoading(false)
+      setInterval(0)
     } else {
       setTimeout(() => {
         setLoading(false)
