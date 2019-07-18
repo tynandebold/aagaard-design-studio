@@ -36,7 +36,7 @@ function SEO({ description, lang, meta, title }) {
         lang,
       }}
       title={title}
-      titleTemplate={`${site.siteMetadata.title} | %s`}
+      titleTemplate={`%s · ${site.siteMetadata.title}`}
       link={[
         { rel: "icon", type: "image/png", sizes: "64x64", href: `${icon}` },
         { rel: "shortcut icon", type: "image/png", href: `${icon}` },
