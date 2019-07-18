@@ -16,6 +16,7 @@ const IndexPage = () => {
   const [index, setIndex] = useState(0)
   const [interval, setInterval] = useState(375)
   const [loading, setLoading] = useState(true)
+  const [dataLoaded, setDataLoaded] = useState(false)
   const [projects, setProjects] = useState([{}])
   const [shouldAutoplay, setAutoplay] = useState(false)
 
@@ -39,10 +40,12 @@ const IndexPage = () => {
 
     if (sessionStorage.getItem("ads-loaded")) {
       setLoading(false)
+      setDataLoaded(true)
       setInterval(0)
     } else {
       setTimeout(() => {
         setLoading(false)
+        setDataLoaded(true)
         setInterval(0)
         sessionStorage.setItem("ads-loaded", true)
       }, 3200)
@@ -63,6 +66,7 @@ const IndexPage = () => {
 
         localStorage.setItem("ads-timestamp", Date.now())
         localStorage.setItem("ads-data", JSON.stringify(sortedData))
+        setDataLoaded(true)
       })
       .catch(error => {
         setError(error)
@@ -91,7 +95,7 @@ const IndexPage = () => {
         <Nav page="home" projectTitle={projects[index].title || ""} />
       </section>
       <section className="right">
-        {!loading && !error && (
+        {!error && dataLoaded && (
           <>
             <div className="img-wrapper">
               <Flickity
