@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import "flickity/dist/flickity.css"
 
 import Layout from "../components/layout"
@@ -12,120 +13,96 @@ const Flickity =
     : () => null
 
 const IndexPage = () => {
-  const [error, setError] = useState(null)
+  const { allContentfulProject: data } = useStaticQuery(graphql`
+    {
+      allContentfulProject(sort: { fields: order, order: ASC }) {
+        edges {
+          node {
+            title
+            order
+            media {
+              file {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
   const [index, setIndex] = useState(0)
   const [interval, setInterval] = useState(375)
   const [loading, setLoading] = useState(true)
-  const [dataLoaded, setDataLoaded] = useState(false)
-  const [projects, setProjects] = useState([{}])
-  const [shouldAutoplay, setAutoplay] = useState(false)
-
-  const flickityOptions = {
-    autoPlay: shouldAutoplay,
-    friction: 0.5,
-    fullscreen: true,
-    imagesLoaded: true,
-    pageDots: false,
-    selectedAttraction: 0.08,
-    setGallerySize: false,
-    wrapAround: true,
-  }
+  const isMobile =
+    typeof window !== "undefined"
+      ? window.innerWidth < 660
+        ? true
+        : false
+      : null
+  const wasLoaded =
+    typeof window !== "undefined" ? sessionStorage.getItem("ads-loaded") : null
 
   useEffect(() => {
     setLoading(true)
 
-    if (window.innerWidth < 660) {
-      setAutoplay(2250)
-    }
-
-    if (sessionStorage.getItem("ads-loaded")) {
+    if (wasLoaded) {
       setLoading(false)
-      setDataLoaded(true)
       setInterval(0)
     } else {
       setTimeout(() => {
         setLoading(false)
-        setDataLoaded(true)
         setInterval(0)
         sessionStorage.setItem("ads-loaded", true)
       }, 3200)
     }
-
-    const lastVisited = localStorage.getItem("ads-timestamp")
-
-    if (lessThan12HoursAgo(lastVisited)) {
-      useLocalData()
-      return
-    }
-
-    fetch(`https://aagaard-design-studio-admin.herokuapp.com/api/projects`)
-      .then(response => response.json())
-      .then(data => {
-        const sortedData = data.projects.sort((a, b) => +a.order - +b.order)
-        setProjects(sortedData)
-
-        localStorage.setItem("ads-timestamp", Date.now())
-        localStorage.setItem("ads-data", JSON.stringify(sortedData))
-        setDataLoaded(true)
-      })
-      .catch(error => {
-        setError(error)
-      })
   }, [])
-
-  const useLocalData = () => {
-    const data = localStorage.getItem("ads-data")
-
-    setProjects(JSON.parse(data))
-  }
-
-  const lessThan12HoursAgo = date => {
-    const lengthOfTime = 12 * 60 * 60 * 1000 // 12 hours
-    const timeAgo = Date.now() - lengthOfTime
-
-    return date > timeAgo
-  }
-
-  if (error) console.log(error)
 
   return (
     <Layout darkTheme={true}>
       <SEO title="home" />
       <section className="left">
-        <Nav page="home" projectTitle={projects[index].title || ""} />
+        <Nav page="home" projectTitle={data.edges[index].node.title || ""} />
       </section>
       <section className="right">
-        {!error && dataLoaded && (
-          <>
-            <div className="img-wrapper">
-              <Flickity
-                flickityRef={c => {
-                  c.on("change", () => setIndex(c.selectedIndex))
-                }}
-                options={flickityOptions}
-              >
-                {projects.map((project, index) => (
-                  <div
-                    className="img-container"
-                    key={index}
-                    style={{ backgroundImage: `url(${project.image})` }}
-                  />
-                ))}
-              </Flickity>
-            </div>
-          </>
-        )}
-        {error && (
+        <div className="img-wrapper">
+          <Flickity
+            flickityRef={c => {
+              c.on("change", () => setIndex(c.selectedIndex))
+            }}
+            options={{
+              autoPlay: isMobile ? 2250 : false,
+              friction: 0.5,
+              fullscreen: true,
+              imagesLoaded: true,
+              pageDots: false,
+              selectedAttraction: 0.08,
+              setGallerySize: false,
+              wrapAround: true,
+            }}
+          >
+            {data.edges.map(({ node }, index) => (
+              <div
+                className="img-container"
+                key={index}
+                style={{ backgroundImage: `url(${node.media.file.url})` }}
+              />
+            ))}
+          </Flickity>
+        </div>
+        {data.edges.length === 0 && (
           <p style={{ color: "#fff" }}>
             An error occurred. Please try again later.
           </p>
         )}
       </section>
-      <Loading
-        class={loading ? "show" : "hide"}
-        interval={interval}
-        text="Loading"
-      />
+      {!wasLoaded && (
+        <Loading
+          class={loading ? "show" : "hide"}
+          interval={interval}
+          text="Loading"
+        />
+      )}
     </Layout>
   )
 }
