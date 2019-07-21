@@ -287,12 +287,14 @@ main {
   position: relative;
 }
 
-.img-container {
+.project-img {
   background-color: var(--color-dark);
   background-position: center;
   background-size: cover;
+  border: 1px solid var(--color-dark);
+  bottom: 0;
   left: 0;
-  padding-top: 91%;
+  margin: auto 0;
   position: absolute;
   top: 0;
   width: 100%;
