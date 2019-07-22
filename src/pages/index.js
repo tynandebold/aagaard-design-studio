@@ -82,10 +82,10 @@ const IndexPage = () => {
             }}
           >
             {data.edges.map(({ node }, index) => (
-              <img
-                className="project-img"
+              <div
+                className="img-container"
                 key={index}
-                src={node.media.file.url}
+                style={{ backgroundImage: `url(${node.media.file.url})` }}
               />
             ))}
           </Flickity>
