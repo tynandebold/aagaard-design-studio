@@ -36,7 +36,7 @@ const IndexPage = () => {
   const [loading, setLoading] = useState(true)
   const isMobile =
     typeof window !== "undefined"
-      ? window.innerWidth < 660
+      ? window.innerWidth < 800
         ? true
         : false
       : null

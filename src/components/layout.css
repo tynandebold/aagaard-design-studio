@@ -291,17 +291,13 @@ main {
   background-color: var(--color-dark);
   background-position: center;
   background-size: cover;
+  border: 1px solid var(--color-dark);
   left: 0;
   padding-top: 91%;
   position: absolute;
   top: 0;
   width: 100%;
   will-change: opacity;
-}
-
-.img-container.is-selected ~ div {
-  border: 1px solid var(--color-dark);
-  transition: border .2s ease;
 }
 
 button {
@@ -421,7 +417,7 @@ button.flickity-button.flickity-prev-next-button {
   width: 50%;
 }
 
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 800px) {
   button.flickity-button.flickity-prev-next-button {
     display: none;
     pointer-events: none;
