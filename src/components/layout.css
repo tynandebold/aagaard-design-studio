@@ -248,6 +248,15 @@ main {
   }
 }
 
+.right .info-link {
+  color: rgb(13, 13, 13);
+  opacity: 0.4;
+}
+
+.right .info-link:hover {
+  opacity: 1;
+}
+
 .date {
   align-self: flex-end;
   line-height: normal;
