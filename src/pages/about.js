@@ -32,7 +32,7 @@ const AboutPage = () => {
               <a
                 className="info-link"
                 href={node.data.uri}
-                rel="noopener"
+                rel="noopener noreferrer"
                 target="_blank"
               >
                 {children}
