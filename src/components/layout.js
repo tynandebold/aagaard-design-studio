@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 
-const Layout = ({ children, darkTheme }) => (
+const Layout = ({ children, darkTheme, errorPage }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -24,7 +24,11 @@ const Layout = ({ children, darkTheme }) => (
       >
         <Header siteTitle={data.site.siteMetadata.title} dark={darkTheme} />
         <>
-          <main>{children}</main>
+          {errorPage ? (
+            <main className="error-page">{children}</main>
+          ) : (
+            <main>{children}</main>
+          )}
         </>
       </div>
     )}
