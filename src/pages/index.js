@@ -91,7 +91,7 @@ const IndexPage = () => {
           </Flickity>
         </div>
         {data.edges.length === 0 && (
-          <p style={{ color: "#fff" }}>
+          <p style={{ color: "#f2f1f0" }}>
             An error occurred. Please try again later.
           </p>
         )}

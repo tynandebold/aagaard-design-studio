@@ -30,7 +30,7 @@ const Contact = () => {
             position: "absolute",
             right: 0,
           }}
-          defaultValue="fta@charlietango.dk"
+          defaultValue="contact@aagaarddesign.studio"
         />
         Contact
       </button>

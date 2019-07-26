@@ -345,7 +345,7 @@ button:hover {
 
 .copied-msg {
   background-color: var(--color-dark);
-  color: #ffffff;
+  color: var(--color-light);
   font-size: 1rem;
   font-stretch: normal;
   font-style: normal;
@@ -367,7 +367,7 @@ button:hover {
 }
 
 .project-title {
-  color: #fff;
+  color: var(--color-light);
   font-weight: 500;
   margin-left: auto;
 }
@@ -391,7 +391,7 @@ button:hover {
 }
 
 .preloader.show {
-  color: #fff;
+  color: var(--color-light);
   transition: color 0.5s ease;
 }
 
