@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Nav from "../components/nav"
 
-const AboutPage = () => {
+const InfoPage = () => {
   const { contentfulInfo: data } = useStaticQuery(graphql`
     {
       contentfulInfo {
@@ -20,10 +20,9 @@ const AboutPage = () => {
 
   return (
     <Layout darkTheme={false}>
-      <SEO title="about" />
+      <SEO title="info" />
       <section className="left">
-        <Nav page="about" />
-        {console.log(data)}
+        <Nav page="info" />
       </section>
       <section className="right">
         {documentToReactComponents(data.infoText.json, {
@@ -46,4 +45,4 @@ const AboutPage = () => {
   )
 }
 
-export default AboutPage
+export default InfoPage

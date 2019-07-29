@@ -14,7 +14,7 @@ const Nav = ({ page, projectTitle }) => (
         >
           Work
         </Link>
-        <Link to="/about/" style={{ color: "#f2f1f0", opacity: 0.4 }}>
+        <Link to="/info/" style={{ color: "#f2f1f0", opacity: 0.4 }}>
           Info
         </Link>
         <div className="project-title">{projectTitle}</div>
@@ -29,7 +29,7 @@ const Nav = ({ page, projectTitle }) => (
           {" "}
           Work{" "}
         </Link>
-        <Link to="/about/" activeStyle={{ color: "#0d0d0d" }}>
+        <Link to="/info/" activeStyle={{ color: "#0d0d0d" }}>
           Info
         </Link>
         <Contact />

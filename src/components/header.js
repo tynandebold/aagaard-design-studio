@@ -13,7 +13,7 @@ const Header = ({ siteTitle, dark }) => (
             textDecoration: `none`,
           }}
         >
-          {siteTitle}
+          {siteTitle}.
         </Link>
       </h1>
     </div>

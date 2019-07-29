@@ -1,12 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `aagaard design studio.`,
+    title: `aagaard design studio`,
     description: `A Copenhagen–based, one-man army design studio.`,
     author: `Frederik Aagaard`,
     keywords: [
       `aagaard design studio`,
       `Frederik Aagaard`,
+      `aagaarddesign.studio`,
+      `designer`,
       `design`,
+      `digital designer`,
       `design studio`,
       `creative advisor`,
       `creative director`,
@@ -14,6 +17,7 @@ module.exports = {
       `charlie tango`,
       `danske bank`,
       `denmark`,
+      `dansk`,
     ],
   },
   plugins: [
