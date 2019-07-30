@@ -5,7 +5,7 @@ import Contact from "../components/contact"
 
 const Nav = ({ page, projectTitle }) => (
   <nav>
-    {page === "home" ? (
+    {page === "work" ? (
       <>
         <Link
           className="nav-link--first"

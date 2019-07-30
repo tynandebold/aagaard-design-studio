@@ -60,9 +60,9 @@ const IndexPage = () => {
 
   return (
     <Layout darkTheme={true}>
-      <SEO title="home" />
+      <SEO title="work" />
       <section className="left">
-        <Nav page="home" projectTitle={data.edges[index].node.title || ""} />
+        <Nav page="work" projectTitle={data.edges[index].node.title || ""} />
       </section>
       <section className="right">
         <div className="img-wrapper">
