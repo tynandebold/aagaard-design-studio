@@ -14,7 +14,7 @@ const Nav = ({ page, projectTitle }) => (
         >
           Work
         </Link>
-        <Link to="/info/" style={{ color: "#f2f1f0", opacity: 0.4 }}>
+        <Link to="/info/" style={{ color: "#f2f1f0", opacity: 0.5 }}>
           Info
         </Link>
         <div className="project-title">{projectTitle}</div>
@@ -24,7 +24,7 @@ const Nav = ({ page, projectTitle }) => (
         <Link
           className="nav-link--first"
           to="/"
-          style={{ color: "#0d0d0d", opacity: 0.4 }}
+          style={{ color: "#0d0d0d", opacity: 0.5 }}
         >
           {" "}
           Work{" "}

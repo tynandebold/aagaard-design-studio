@@ -256,7 +256,7 @@ main.error-page {
 
 .right .info-link {
   color: rgb(13, 13, 13);
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .right .info-link:hover {
@@ -325,7 +325,7 @@ button {
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
-  opacity: 0.4;
+  opacity: 0.5;
   padding: 0;
   transition: 0.2s ease opacity;
 }
