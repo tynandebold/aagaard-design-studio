@@ -362,7 +362,7 @@ button:hover {
   text-align: center;
   transition: 0.35s opacity ease;
   top: -3rem;
-  width: 200px;
+  width: 185px;
 }
 
 .copied-msg.active {
