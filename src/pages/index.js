@@ -71,13 +71,17 @@ const IndexPage = () => {
               c.on("change", () => setIndex(c.selectedIndex))
             }}
             options={{
-              autoPlay: isMobile ? 2250 : false,
-              friction: isMobile ? 0.35 : 0.5,
-              fullscreen: true,
+              accessibility: false,
+              autoPlay: isMobile ? 2200 : false,
+              bgLazyLoad: 2,
+              cellAlign: "left",
+              draggable: true,
+              friction: 0.4,
               imagesLoaded: true,
+              lazyLoad: 2,
               pageDots: false,
-              selectedAttraction: isMobile ? 0.05 : 0.08,
-              setGallerySize: false,
+              resize: true,
+              selectedAttraction: 0.05,
               wrapAround: true,
             }}
           >
