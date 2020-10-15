@@ -72,11 +72,11 @@ const IndexPage = () => {
             }}
             options={{
               autoPlay: isMobile ? 2250 : false,
-              friction: isMobile ? 0.3 : 0.5,
+              friction: isMobile ? 0.35 : 0.5,
               fullscreen: true,
               imagesLoaded: true,
               pageDots: false,
-              selectedAttraction: isMobile ? 0.15 : 0.08,
+              selectedAttraction: isMobile ? 0.05 : 0.08,
               setGallerySize: false,
               wrapAround: true,
             }}
