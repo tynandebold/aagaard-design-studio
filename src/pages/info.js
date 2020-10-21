@@ -39,7 +39,7 @@ const InfoPage = () => {
             ),
           },
         })}
-        <p className="date">26.06––2019</p>
+        <p className="copyright">© 2012—2020</p>
       </section>
     </Layout>
   )

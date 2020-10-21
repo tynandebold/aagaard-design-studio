@@ -67,17 +67,30 @@ const IndexPage = () => {
       <section className="right">
         <div className="img-wrapper">
           <Flickity
-            flickityRef={c => {
-              c.on("change", () => setIndex(c.selectedIndex))
+            flickityRef={flkty => {
+              flkty.on("change", () => setIndex(flkty.selectedIndex))
+              flkty.on("staticClick", e => {
+                const middle = e.srcElement.offsetWidth / 2
+                const rightSideClick = e.x > middle ? true : false
+
+                if (rightSideClick) {
+                  flkty.next()
+                } else {
+                  flkty.previous()
+                }
+              })
             }}
             options={{
-              autoPlay: isMobile ? 2250 : false,
-              friction: 0.5,
-              fullscreen: true,
+              accessibility: false,
+              autoPlay: isMobile ? 2200 : false,
+              bgLazyLoad: 2,
+              draggable: true,
+              friction: 0.4,
               imagesLoaded: true,
+              lazyLoad: 2,
               pageDots: false,
-              selectedAttraction: 0.08,
-              setGallerySize: false,
+              resize: true,
+              selectedAttraction: 0.05,
               wrapAround: true,
             }}
           >
