@@ -427,6 +427,11 @@ button:hover {
   }
 }
 
+.flickity-enabled {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 button.flickity-button.flickity-prev-next-button {
   -webkit-transform: none;
   background-color: transparent;
