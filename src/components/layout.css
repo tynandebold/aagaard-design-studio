@@ -309,6 +309,7 @@ main.error-page {
   background-color: var(--color-dark);
   background-position: center;
   background-size: cover;
+  border-radius: 5px;
   left: 0;
   padding-top: 91%;
   position: absolute;
@@ -427,14 +428,10 @@ button:hover {
   }
 }
 
-.flickity-enabled {
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-@media only screen and (max-width: 800px) { 
-  .flickity-viewport {
+@media only screen and (min-width: 1024px) {
+  .flickity-enabled {
     border-radius: 5px;
+    overflow: hidden;
   }
 }
 
