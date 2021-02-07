@@ -432,6 +432,12 @@ button:hover {
   overflow: hidden;
 }
 
+@media only screen and (max-width: 800px) { 
+  .flickity-viewport {
+    border-radius: 5px;
+  }
+}
+
 button.flickity-button.flickity-prev-next-button {
   -webkit-transform: none;
   background-color: transparent;
