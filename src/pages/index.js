@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import "flickity/dist/flickity.css"
-import "flickity-fade"
 
 import Layout from "../components/layout"
 import Loading from "../components/loading"
@@ -13,7 +12,8 @@ const Flickity =
     ? require("react-flickity-component")
     : () => null
 
-// typeof window !== "undefined" ? require("flickity-fade") : () => null
+/* eslint-disable */
+typeof window !== "undefined" ? require("flickity-fade") : () => null
 
 const IndexPage = () => {
   const { allContentfulProject: data } = useStaticQuery(graphql`
