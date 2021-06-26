@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import "flickity/dist/flickity.css"
+import "flickity-fade"
 
 import Layout from "../components/layout"
 import Loading from "../components/loading"
@@ -11,6 +12,8 @@ const Flickity =
   typeof window !== "undefined"
     ? require("react-flickity-component")
     : () => null
+
+// typeof window !== "undefined" ? require("flickity-fade") : () => null
 
 const IndexPage = () => {
   const { allContentfulProject: data } = useStaticQuery(graphql`
@@ -85,6 +88,7 @@ const IndexPage = () => {
               autoPlay: isMobile ? 2200 : false,
               bgLazyLoad: 2,
               draggable: true,
+              fade: true,
               friction: 0.85,
               imagesLoaded: true,
               lazyLoad: 2,
