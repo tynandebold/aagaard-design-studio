@@ -85,12 +85,12 @@ const IndexPage = () => {
               autoPlay: isMobile ? 2200 : false,
               bgLazyLoad: 2,
               draggable: true,
-              friction: 0.4,
+              friction: 0.85,
               imagesLoaded: true,
               lazyLoad: 2,
               pageDots: false,
               resize: true,
-              selectedAttraction: 0.05,
+              selectedAttraction: 0.3,
               wrapAround: true,
             }}
           >
