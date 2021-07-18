@@ -4,6 +4,9 @@
   "description": "A website built for a Copenhagen–based, one-man army design studio.",
   "version": "1.0.0",
   "author": "Tynan DeBold <thdebold@gmail.com>",
+  "engines": {
+    "node": "11.2.0"
+  },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.2.0",
     "@contentful/rich-text-types": "^13.1.0",
