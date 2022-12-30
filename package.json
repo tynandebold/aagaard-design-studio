@@ -11,7 +11,7 @@
     "@contentful/rich-text-react-renderer": "^13.2.0",
     "@contentful/rich-text-types": "^13.1.0",
     "flickity-fade": "^1.0.0",
-    "gatsby": "^2.3.16",
+    "gatsby": "^2.32.13",
     "gatsby-background-image": "^0.8.0",
     "gatsby-image": "^2.0.37",
     "gatsby-plugin-manifest": "^2.0.28",
